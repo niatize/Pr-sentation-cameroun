@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Chat Messenger</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="app-container">
+    <header>
+        <h3>Quiz Master</h3>
+    </header>
+
+    <div id="chat-box">
+        </div>
+
+    <div class="input-area">
+        <input type="text" id="user-input" placeholder="Répondez ici...">
+        <button id="send-btn">Envoyer</button>
+    </div>
+</div>
+
+<script>
+    const questions = [
+    "Bienvenue ! Prêt pour le quiz ? (Tapez 'oui' pour commencer)",
+    "Question 1 : Quelle est la capitale de la France ?",
+    "Question 2 : Combien font 2 + 2 ?",
+    "Question 3 : De quelle couleur est le ciel ?",
+    "Bravo ! Vous avez terminé le quiz."
+];
+
+let etape = 0;
+const chatBox = document.getElementById('chat-box');
+const userInput = document.getElementById('user-input');
+const sendBtn = document.getElementById('send-btn');
+
+// Fonction pour créer et afficher un message
+function ajouterMessage(texte, type) {
+    const div = document.createElement('div');
+    div.classList.add('message', type);
+    div.textContent = texte;
+    chatBox.appendChild(div);
+    
+    // Scroll automatique vers le bas
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+// Envoyer la première question immédiatement
+window.onload = () => {
+    ajouterMessage(questions[etape], 'received');
+};
+
+// Gestion de l'envoi
+function gererEnvoi() {
+    const reponse = userInput.value.trim();
+    
+    if (reponse !== "" && etape < questions.length - 1) {
+        // 1. On affiche la réponse de l'utilisateur
+        ajouterMessage(reponse, 'sent');
+        userInput.value = "";
+
+        // 2. Le bot répond après un petit délai
+        setTimeout(() => {
+            etape++;
+            ajouterMessage(questions[etape], 'received');
+        }, 600);
+    }
+}
+
+// Écouteurs d'événements (Clic et Touche Entrée)
+sendBtn.addEventListener('click', gererEnvoi);
+
+</script>
+</body>
+<style>
+    /* Reset de base */
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+background-color: #f0f2f5; 
+display: flex; 
+justify-content: center; 
+padding: 20px; }
+
+#app-container { width: 100%; max-width: 450px; 
+    height: 80vh; background: white; 
+    border-radius: 10px;
+     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      display: flex;
+     flex-direction: column;
+      overflow: hidden; }
+
+header { padding: 15px;
+     background: #fff;
+      border-bottom: 1px solid #ddd;
+       text-align: center; }
+
+#chat-box { flex: 1;
+     padding: 15px;
+      overflow-y: auto;
+       display: flex;
+        flex-direction: column;
+         gap: 10px;
+          background-color: #ffffff; 
+        }
+
+/* Styles des bulles */
+.message { max-width: 75%;
+     padding: 10px 15px;
+      border-radius: 18px;
+      font-size: 14.5px; 
+      line-height: 1.4; 
+      animation: fadeIn 0.3s ease; }
+
+.sent { align-self: flex-end; background-color: #0084ff; color: white; border-bottom-right-radius: 4px; }
+
+.received { align-self: flex-start; background-color: #e4e6eb; color: black; border-bottom-left-radius: 4px; }
+
+/* Barre d'entrée */
+.input-area { padding: 15px; border-top: 1px solid #ddd; display: flex; gap: 10px; }
+input { flex: 1; border: none; background: #f0f2f5; padding: 10px 15px; border-radius: 20px; outline: none; }
+button { background: transparent; color: #0084ff; border: none; font-weight: bold; cursor: pointer; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</html>
