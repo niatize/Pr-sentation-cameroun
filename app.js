@@ -158,3 +158,14 @@ function gestion_denvoie(){
     }
 }
 envoie.addEventListener('click',gestion_denvoie);
+
+
+
+let content=document.getElementById("hr_contain");
+let main=document.getElementById("main");
+let text=document.getElementById("text");
+
+content.addEventListener('click',()=>{
+    main.classList.toggle('aff');
+    text.classList.toggle('cacher')
+})

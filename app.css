@@ -70,10 +70,9 @@ a{
     border-radius: 18px;
     font-size: 14.5px; 
     line-height: 1.4; 
-    animation: fadeIn 0.3s ease; }
+     }
 
 .send{ 
-    font-size: larger;
     align-self: flex-end;
     background-color: #0084ff;
     color: white;
@@ -81,8 +80,10 @@ a{
 }
 .recevoir{ 
     align-self: flex-start;
-    background-color: #e4e6eb;
+    background-color: #ffffffea;
     color: black;
+    font-weight: bolder;
+    font-size: larger;
     border-bottom-left-radius: 4px; 
     }
 
@@ -97,4 +98,16 @@ a{
     flex-direction: column;
     overflow: scroll; }
 
-
+.text{
+    display: none;
+    
+}
+.aff{
+    display: none;
+}
+.cacher{
+    display: flex;
+    height: 90vh;
+    justify-content: center;
+    align-items: center;
+}
